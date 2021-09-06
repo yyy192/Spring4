@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.bh.b4.notice.NoticeDAO">
+  
+  	<select id="getList" resultType="com.bh.b4.notice.NoticeDTO" parameterType="com.bh.b4.util.Pager">
+  		SELECT * FROM
+		    (SELECT ROWNUM R, BK.* FROM 
+		            (SELECT * 
+		            FROM NOTICE
+		            ORDER BY NUM DESC
+		            ) 
+		        BK
+		    )
+		WHERE R BETWEEN #{startRow} AND #{lastRow}
+  	</select>
+  	
+  	<select id="getSelect" parameterType="com.bh.b4.notice.NoticeDTO" resultType="com.bh.b4.notice.NoticeDTO">
+  		SELECT * FROM NOTICE WHERE NUM=#{num}
+  	</select>
+  	
+  	<insert id="setInsert" parameterType="com.bh.b4.notice.NoticeDTO">
+  		INSERT INTO NOTICE(NUM, TITLE, CONTENTS, WRITER) VALUES(NOTICE_SEQ.NEXTVAL, #{title}, #{contents}, #{writer})	
+  	</insert>
+  	
+  	<delete id="setDelete" parameterType="com.bh.b4.notice.NoticeDTO">
+  		DELETE NOTICE WHERE NUM=#{num}
+  	</delete>
+  	
+  	<update id="setUpdate" parameterType="com.bh.b4.notice.NoticeDTO">
+  		UPDATE NOTICE SET TITLE=#{title}, CONTENTS=#{contents}, WRITER=#{writer} WHERE NUM=#{num}
+  	</update>
+  
+  	
+  </mapper>
