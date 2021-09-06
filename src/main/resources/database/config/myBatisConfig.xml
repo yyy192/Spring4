@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+ <configuration>
+ 
+ 	<typeAliases>
+ 		<typeAlias type="com.bh.b4.board.BoardDTO" alias="BoardDTO"/>
+ 		<typeAlias type="com.bh.b4.board.notice.NoticeDTO" alias="NoticeDTO"/>
+ 		<typeAlias type="com.bh.b4.board.qna.QnaDTO" alias="QnaDTO"/>
+ 		
+ 		<typeAlias type="java.lang.Long" alias="Long"/>
+ 	</typeAliases>
+ 
+ </configuration>

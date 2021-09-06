@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.bh.b4.board.notice.NoticeDAO">
+  	
+  	<select id="getCount" resultType="java.lang.Long" parameterType="com.bh.b4.util.Pager">
+  		SELECT COUNT(NUM) FROM NOTICE
+  		WHERE 
+			<choose>
+				<when test="kind == 'num'">
+					num
+				</when>
+				<when test="kind == 'title'">
+					title
+				</when>
+				<when test="kind == 'contents'">
+					contents
+				</when>
+				<otherwise>
+					writer
+				</otherwise>
+			</choose>
+
+			LIKE '%' || #{search} || '%' 
+		    ORDER BY NUM DESC
+  	</select>
+  	
+  	<select id="getList" parameterType="com.bh.b4.util.Pager" resultType="NoticeDTO">
+  		SELECT * FROM
+		    (SELECT ROWNUM R, BK.* FROM 
+		            (SELECT * 
+		            FROM NOTICE
+		            WHERE 
+					
+					<choose>
+						<when test="kind == 'num'">
+							num
+						</when>
+						<when test="kind == 'title'">
+							title
+						</when>
+						<when test="kind == 'contents'">
+							contents
+						</when>
+						<otherwise>
+							writer
+						</otherwise>
+					</choose>
+
+					LIKE '%' || #{search} || '%' 
+		            ORDER BY NUM DESC
+		            ) 
+		        BK
+		    )
+		WHERE R BETWEEN #{startRow} AND #{lastRow}
+  	</select>
+  	
+  	<select id="getSelect" parameterType="BoardDTO" resultType="NoticeDTO">
+  		SELECT * FROM NOTICE WHERE NUM=#{num}
+  	</select>
+  	
+  	<insert id="setInsert" parameterType="BoardDTO">
+  		INSERT INTO NOTICE(NUM, TITLE, CONTENTS, WRITER) VALUES(NOTICE_SEQ.NEXTVAL, #{title}, #{contents}, #{writer})	
+  	</insert>
+  	
+  	<delete id="setDelete" parameterType="BoardDTO">
+  		DELETE NOTICE WHERE NUM=#{num}
+  	</delete>
+  	
+  	<update id="setUpdate" parameterType="BoardDTO">
+  		UPDATE NOTICE SET TITLE=#{title}, CONTENTS=#{contents}, WRITER=#{writer} WHERE NUM=#{num}
+  	</update>
+  	
+  </mapper>
