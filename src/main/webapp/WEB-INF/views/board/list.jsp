@@ -98,7 +98,7 @@
 			  </ul>
 			</nav>
 			
-			
+			<a href="./insert" class="btn btn-secondary">ADD</a>
 		</div>
 	</div>
 

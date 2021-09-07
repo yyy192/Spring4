@@ -5,29 +5,17 @@
   
   <mapper namespace="com.bh.b4.board.notice.NoticeDAO">
   	
-  	<select id="getCount" resultType="java.lang.Long" parameterType="com.bh.b4.util.Pager">
+  	<select id="getCount" resultType="java.lang.Long" parameterType="Pager">
   		SELECT COUNT(NUM) FROM NOTICE
-  		WHERE 
-			<choose>
-				<when test="kind == 'num'">
-					num
-				</when>
-				<when test="kind == 'title'">
-					title
-				</when>
-				<when test="kind == 'contents'">
-					contents
-				</when>
-				<otherwise>
-					writer
-				</otherwise>
-			</choose>
-
-			LIKE '%' || #{search} || '%' 
-		    ORDER BY NUM DESC
+  		 
+			<if test="kind == 'num'">WHERE num LIKE '%' || #{search} || '%' ORDER BY NUM DESC</if>
+			<if test="kind == 'title'">WHERE title LIKE '%' || #{search} || '%' ORDER BY NUM DESC</if>
+			<if test="kind == 'contents'">WHERE contents LIKE '%' || #{search} || '%' ORDER BY NUM DESC</if>
+			<if test="kind == 'writer'">WHERE writer LIKE '%' || #{search} || '%' ORDER BY NUM DESC</if>
+			
   	</select>
   	
-  	<select id="getList" parameterType="com.bh.b4.util.Pager" resultType="NoticeDTO">
+  	<select id="getList" parameterType="Pager" resultType="NoticeDTO">
   		SELECT * FROM
 		    (SELECT ROWNUM R, BK.* FROM 
 		            (SELECT * 

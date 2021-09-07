@@ -2,26 +2,34 @@ package com.bh.b4.util;
 
 public class Pager {
 
+	// 검색
 	private String kind;
 	private String search;
 	
 	private Long pn;
+	//한 페이지에 출력할 리스트의 글 개수 - 10
 	private Long perPage;
+	//한 페이지에 출력할 pn의 개수 - 5
+	private Long perBlock;
 	
+	// RowNum Mapper에서 사용
 	private Long startRow;
 	private Long lastRow;
 	
 	private Long startNum;
 	private Long lastNum;
 	
+	//전체 페이지의 개수 - 10개씩 몇 번까지 나오나?
 	private Long totalPage;
 	
+	//------------------- rowNum 계산
 	public void makeRow() {
 		
 		this.startRow = (this.getPn()-1)*this.getPerPage()+1;
 		this.lastRow = this.getPn()*this.getPerPage();
 	}
 	
+	//------------------- startNum, lastNum  jsp 번호 출력
 	public void makeNum(Long totalCount) {
 		//1. totlaCount 구하기
 		//Long  totalCount = 211L;
@@ -34,20 +42,20 @@ public class Pager {
 			totalPage++;
 		}
 		
-		//3. totalBlock 구하기
-		Long totalBlock = totalPage/5;
-		if(totalPage%5 !=0) {
+		//3. totalPage로 totalBlock구하기
+		Long totalBlock = totalPage/this.getPerBlock();
+		if(totalPage%this.getPerBlock() !=0) {
 			totalBlock++;
 		}
 		
-		//4. pn으로 curBlock 구하기
-		
+		//3-1.
 		if(totalPage<this.getPn()) {
 			this.setPn(totalPage);
 		}
 		
-		Long curBlock = this.getPn()/5;
-		if(this.getPn()%5 !=0) {
+		//4. pn으로 curBlock(현재 block 번호) 구하기
+		Long curBlock = this.getPn()/this.getPerBlock();
+		if(this.getPn()%this.getPerBlock() !=0) {
 			curBlock++;
 		}
 		
@@ -55,11 +63,13 @@ public class Pager {
 		this.startNum = (curBlock-1)*5+1;
 		this.lastNum = curBlock*5;
 		
+		//6. curBLock이 마지막 Block일 때
 		if(curBlock == totalBlock) {
 			this.lastNum = totalPage;
 		}
 	}
 	
+//----------------------- Setter, Getter -----------------------	
 	
 	public String getKind() {
 		return kind;
@@ -101,11 +111,20 @@ public class Pager {
 		this.lastNum = lastNum;
 	}
 
+	public Long getPerBlock() {
+		this.perBlock = 5L;
+		return perBlock;
+	}
+
+	public void setPerBlock(Long perBlock) {
+		this.perBlock = perBlock;
+	}
+	
 	public Long getPerPage() {
-		
-		if(this.perPage==null || this.perPage==0) {
-			this.perPage=10L;
-		}
+		this.perPage=10L;
+//		if(this.perPage==null || this.perPage==0) {
+//			this.perPage=10L;
+//		}
 		return perPage;
 	}
 

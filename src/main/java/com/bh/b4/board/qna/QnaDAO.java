@@ -44,18 +44,22 @@ public class QnaDAO implements BoardDAO {
 	@Override
 	public int setDelete(BoardDTO boardDTO) throws Exception {
 		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.delete(NAMESPACE+"setDelete", boardDTO);
 	}
 
 	@Override
 	public int setUpdate(BoardDTO boardDTO) throws Exception {
 		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update(NAMESPACE+"setUpdate", boardDTO);
 	}
 	
 	//답글
 	public int setReply(QnaDTO qnaDTO) throws Exception {
-		return 0;
+		return sqlSession.insert(NAMESPACE+"setReply", qnaDTO);
+	}
+	
+	public int setReplyUpdate(QnaDTO qnaDTO) throws Exception {
+		return sqlSession.update(NAMESPACE+"setReplyUpdate", qnaDTO);
 	}
 
 }
