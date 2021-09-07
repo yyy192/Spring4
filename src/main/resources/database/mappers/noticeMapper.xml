@@ -61,4 +61,7 @@
   		UPDATE NOTICE SET TITLE=#{title}, CONTENTS=#{contents}, WRITER=#{writer} WHERE NUM=#{num}
   	</update>
   	
+  	<update id="setHitsUpdate" parameterType="BoardDTO">
+  		UPDATE NOTICE SET HITS = HITS+1 WHERE NUM=#{num}
+  	</update>
   </mapper>

@@ -80,4 +80,8 @@
   	<insert id="setReply" parameterType="QnaDTO">
   		insert into qna values(QNA_SEQ.NEXTVAL, #{title}, #{contents}, #{writer}, SYSDATE, 0, #{ref}, #{step}, #{depth})
   	</insert>
+  	
+  	<update id="setHitsUpdate" parameterType="BoardDTO">
+  		UPDATE QNA SET HITS = HITS+1 WHERE NUM=#{num}
+  	</update>
   </mapper>
