@@ -32,11 +32,11 @@
 				  <input type="text" class="form-control" name="writer" id="writer">
 				</div>
 				
-				<button type="submit">SUBMIT</button>
+				<button id="add" type="button">SUBMIT</button>
 			</form>
 		</div>
 	</div>
 	
-
+	<script type="text/javascript" src="../resources/js/boardCheck.js"></script>
 </body>
 </html>
