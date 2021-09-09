@@ -1,11 +1,9 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
 	<title>Home</title>
-	<script type="text/javascript">
-		alert('Hello world');
-	</script>
 	
 	<c:import url="./temp/boot_head.jsp"></c:import>
 </head>
@@ -14,9 +12,6 @@
 	
 	<br>
 	<h1>HOMEPAGE</h1>
-	
-	<script type="text/javascript">
-		console.log('Body Script');
-	</script>
+
 </body>
 </html>
