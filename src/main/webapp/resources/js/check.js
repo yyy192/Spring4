@@ -26,9 +26,7 @@ all.addEventListener('click', function(){
 //--- 전체선택
 for(let ch of c1){
 	ch.addEventListener('click', function(){
-		
-		let result = true;
-		
+		let result=true;
 		for(let c of c1){
 			if(!c.checked){
 				result = false;
@@ -41,31 +39,35 @@ for(let ch of c1){
 	});
 }
 
-
-// ---- option제외
-
-for(let es of essential){
-	es.addEventListener('click', function(){
-		
-		let result = true;
-		
-		for(let e of essential){
-			if(!e.checked){
-				result = false;
-				break;
-			}
-		}
-		all.checked=result;
-	});
-}
-
-
-
 btn.addEventListener('click', function(){
 	/*alert(all.checked);*/
 	if(all.checked){
 		location.href="./join";
 	}else{
-		alert('필수 약관에 동의해야합니다.');
+		alert('필수 동의');
+		
 	}
 });
+
+// ---- option제외
+let r=true;
+
+for(let es of essential){
+	es.addEventListener('click', function(){
+		
+		r=true;
+		for(let e of essential){
+			if(!e.checked){
+				r = false;
+				break;
+			}
+		}
+		
+		if(r){
+			btn.addEventListener('click', function(){
+				location.href="./join";
+			});
+		}
+	});
+	
+}

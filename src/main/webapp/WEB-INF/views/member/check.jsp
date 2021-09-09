@@ -34,13 +34,13 @@
 		  </label>
 		</div>
 		<div class="form-check">
-		  <input class="form-check-input c1" type="checkbox" value="" id="flexCheckDefault">
+		  <input class="form-check-input c1 essential" type="checkbox" value="" id="flexCheckDefault">
 		  <label class="form-check-label" for="flexCheckDefault">
 		    약관 3(필수)
 		  </label>
 		</div>
 		<div class="form-check">
-		  <input class="form-check-input c1 essential" type="checkbox" value="" id="flexCheckDefault">
+		  <input class="form-check-input c1 option" type="checkbox" value="" id="flexCheckDefault">
 		  <label class="form-check-label" for="flexCheckDefault">
 		    약관 4(선택)
 		  </label>
