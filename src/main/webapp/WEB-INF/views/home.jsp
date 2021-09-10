@@ -12,6 +12,13 @@
 	
 	<br>
 	<h1>HOMEPAGE</h1>
-
+	
+	<c:if test="${not empty member}">
+		<h3>Login이 성공했을 때 보이는 문장</h3>
+	</c:if>
+	<c:if test="${empty member}">
+		<h3>Login을 하기 전 보이는 문장</h3>
+	</c:if>
+	
 </body>
 </html>
