@@ -39,35 +39,33 @@ for(let ch of c1){
 	});
 }
 
+
 btn.addEventListener('click', function(){
-	/*alert(all.checked);*/
-	if(all.checked){
+	let r = true;
+	
+	for(let e of essential){
+		if(!e.checked){
+			r = false;
+			break;
+		}
+	}
+		
+	if(r){
 		location.href="./join";
 	}else{
-		alert('필수 동의');
+		alert('필수 약관 동의');
 		
 	}
+
+
+	
+	
+	
+/*	if(all.checked){
+		location.href="./join";
+	}else{
+		alert('필수 약관 동의');
+		
+	}*/
 });
 
-// ---- option제외
-let r=true;
-
-for(let es of essential){
-	es.addEventListener('click', function(){
-		
-		r=true;
-		for(let e of essential){
-			if(!e.checked){
-				r = false;
-				break;
-			}
-		}
-		
-		if(r){
-			btn.addEventListener('click', function(){
-				location.href="./join";
-			});
-		}
-	});
-	
-}
