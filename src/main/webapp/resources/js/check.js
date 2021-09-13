@@ -1,71 +1,28 @@
 /**
  * check.js
  */
- 
-let c1 = document.getElementsByClassName('c1');
-let all = document.getElementById('all');
-let btn = document.getElementById('btn');
-let option = document.getElementsByClassName('option');
-let essential = document.getElementsByClassName('essential');
 
+$('#all').click(function(){
+	$(".c1").prop("checked", $(this).prop("checked"));
+}); 
 
-all.addEventListener('click', function(){
-	if(all.checked){
-		for(let ch of c1){
-			ch.checked = true;
+$(".c1").click(function(){
+	let result = true;
+	$(".c1").each(function(v1, v2){
+		if(!$(v2).prop("checked")){
+			result = false;
+			console.log(v1, $(v2).prop("checked"));
+			//break; each문 내에서 사용 불가.
 		}
-	}else{
-		for(let ch of c1){
-			ch.checked = false;
-		}	
-	}
-});
-
-//--------------------- 약관동의 check ---------------------------
-
-//--- 전체선택
-for(let ch of c1){
-	ch.addEventListener('click', function(){
-		let result=true;
-		for(let c of c1){
-			if(!c.checked){
-				result = false;
-				break;
-			}
-		}
-		
-		all.checked=result;
-		
 	});
-}
-
-
-btn.addEventListener('click', function(){
-	let r = true;
 	
-	for(let e of essential){
-		if(!e.checked){
-			r = false;
-			break;
-		}
-	}
-		
-	if(r){
-		location.href="./join";
-	}else{
-		alert('필수 약관 동의');
-		
-	}
-
-
-	
-	
-	
-/*	if(all.checked){
-		location.href="./join";
-	}else{
-		alert('필수 약관 동의');
-		
-	}*/
+	$("#all").prop("checked", result);
 });
 
+$("#btn").click(function(){
+	if($("#all").prop("checked")){
+		location.href="./join";
+	}else{
+		alert('필수 약관(들)을 동의하세요.');
+	}
+});

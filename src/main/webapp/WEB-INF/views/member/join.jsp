@@ -6,13 +6,13 @@
 <head>
 	<meta charset="UTF-8">
 	<title>JOIN</title>
+	
+	<c:import url="../temp/boot_head.jsp"></c:import>
 	<style type="text/css">
 		#same{
 			color:red;
 		}
 	</style>
-	
-	<c:import url="../temp/boot_head.jsp"></c:import>
 </head>
 <body>
 	<c:import url="../temp/boot_nav.jsp"></c:import>
@@ -60,12 +60,32 @@
 			  	
 			  </div>
 			  
+			  <div class="mb-3" id="files">
+			  	<label class="form-label"></label>
+			  	<button type="button" id="add" class="btn btn-danger">File Add</button>
+			  	
+			  </div>
+			  <!-- input file 추가 영역 -->
+			  <div id="addResult">
+			  
+			  </div>
+			  
+			  
 			  <div class="mb-3">
+			  <label class="form-label"></label>
 			  	<button type="button" id="btn" class="btn btn-primary">Join</button>
 			  </div>
 			</form>
+			<div class="mb-3" id="f">
+			   <label for="photo" class="form-label">Photo</label>
+			   <input type="file" class="form-control n" id="photo" name="photo">
+			  	
+			</div>
 		</div>
 	</div>
+	
+<script type="text/javascript" src="../resources/js/file.js"></script>	
 <script type="text/javascript" src="../resources/js/join.js"></script>
+
 </body>
 </html>
