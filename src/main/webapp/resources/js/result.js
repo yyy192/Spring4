@@ -1,0 +1,6 @@
+/**
+ * result.js
+ */
+ 
+
+alert('${msg}');

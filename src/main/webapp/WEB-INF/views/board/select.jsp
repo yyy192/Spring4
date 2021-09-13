@@ -40,9 +40,14 @@
 					<td>${dto.hits}</td>
 				</tr>
 			</table>
+			
+			
+		<c:if test="${not empty member and member.id eq dto.writer}">
+			<a href="./delete?num=${dto.num}" class= "btn btn-dark">DELETE</a>
+			<a href="./update?num=${dto.num}" class= "btn btn-dark">UPDATE</a>
+		</c:if>
 		
-		<a href="./delete?num=${dto.num}" class= "btn btn-dark">DELETE</a>
-		<a href="./update?num=${dto.num}" class= "btn btn-dark">UPDATE</a>
+		
 		<c:if test="${board ne 'Notice'}">
 			<a href="./reply?num=${dto.num}" class= "btn btn-dark">REPLY</a>
 		</c:if>

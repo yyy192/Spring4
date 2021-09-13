@@ -29,7 +29,7 @@
 				
 				<div class="mb-3">
 				  <label for="writer" class="form-label">WRITER</label>
-				  <input type="text" class="form-control" name="writer" id="writer">
+				  <input type="text" class="form-control" name="writer" id="writer" readonly="readonly" value="${member.id}">
 				</div>
 				
 				<button type="submit">SUBMIT</button>

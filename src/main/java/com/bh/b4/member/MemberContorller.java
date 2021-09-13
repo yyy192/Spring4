@@ -17,6 +17,43 @@ public class MemberContorller {
 	@Autowired
 	private MemberService memberService;
 	
+	@PostMapping("update")
+	public ModelAndView update(MemberDTO memberDTO, HttpSession session) throws Exception {
+		//수정 전 데이터
+		MemberDTO sessionDTO = (MemberDTO)session.getAttribute("member");
+		
+		//수정 후 데이터
+		memberDTO.setId(sessionDTO.getId());
+		
+		int result = memberService.setUpdate(memberDTO);
+		
+		memberDTO.setName(sessionDTO.getName());
+		session.setAttribute("member", memberDTO);
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("redirect:../");
+		return mv;
+	}
+	
+	@GetMapping("update")
+	public ModelAndView update() throws Exception {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("member/update");
+		return mv;
+	}
+	
+	@GetMapping("delete")
+	public ModelAndView delete(HttpSession session) throws Exception{
+		//형변환 해주기
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+		int result = memberService.setDelete(memberDTO);
+		session.invalidate();
+		
+		ModelAndView mv = new ModelAndView();		
+		mv.setViewName("redirect:../");
+		
+		return mv;
+	}
 	
 	@GetMapping("mypage")
 	public ModelAndView mypage(HttpSession session) throws Exception {
@@ -84,6 +121,24 @@ public class MemberContorller {
 	public ModelAndView check() throws Exception {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("member/check");
+		return mv;
+	}
+	
+	@PostMapping("join")
+	public ModelAndView join(MemberDTO memberDTO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		int result = memberService.setJoin(memberDTO);
+		
+		String message = "회원가입에 실패하였습니다.";
+		String url = "./";
+		if(result>0) {
+			message = "회원가입에 성공하였습니다.";
+			url="../";
+		}
+		
+		mv.addObject("msg", message);
+		mv.addObject("url", url);
+		mv.setViewName("common/result");
 		return mv;
 	}
 	

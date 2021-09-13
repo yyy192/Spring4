@@ -5,6 +5,18 @@
   
   <mapper namespace="com.bh.b4.member.MemberDAO">
   
+  	<update id="setUpdate" parameterType="MemberDTO">
+  		update member set pw=#{pw}, phone=#{phone}, email=#{email} where id=#{id}
+  	</update>
+  
+  	<delete id="setDelete" parameterType="MemberDTO">
+  		delete member where id = #{id}
+   	</delete>
+  	
+  	<insert id="setJoin" parameterType="MemberDTO">
+  		insert into member values(#{id}, #{pw}, #{name}, #{phone}, #{email})
+  	</insert>
+  	
   	<select id="getLogin" parameterType="MemberDTO" resultType="MemberDTO">
   		SELECT * FROM MEMBER WHERE ID = #{id} and PW = #{pw}
   	</select>
