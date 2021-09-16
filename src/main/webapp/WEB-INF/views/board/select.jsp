@@ -14,38 +14,19 @@
 	
 	<div class = "container-fluid">
 		<div class="col-md-7 my-2 mx-auto">
-			<table class="table table-striped table-hover">
-				<tr>
-					<td>Num</td>
-					<td>${dto.num}</td>
-				</tr>
-				<tr>
-					<td>Title</td>
-					<td>${dto.title}</td>
-				</tr>
-				<tr>
-					<td>Contents</td>
-					<td>${dto.contents}</td>
-				</tr>
-				<tr>
-					<td>Writer</td>
-					<td>${dto.writer}</td>
-				</tr>
-				<tr>
-					<td>RegDate</td>
-					<td>${dto.regDate}</td>
-				</tr>
-				<tr>
-					<td>Hits</td>
-					<td>${dto.hits}</td>
-				</tr>
-			</table>
+			<h3>Num : ${dto.num}</h3>
+			<h3>Title : ${dto.title}</h3>
+			<h3>Contents : ${dto.contents}</h3>>
+			<h3>Writer : ${dto.writer}</h3>
+			<h3>RegDate : ${dto.regDate}</h3>
+			<h3>Hits : ${dto.hits}</h3>
 			
-		<c:forEach items="${fileList}" var="f">
+		<c:forEach items="${dto.files}" var="f">
 			<div>
 				<img alt="" src="../resources/upload/${board}/${f.fileName}">
 			</div>
-		</c:forEach>	
+		</c:forEach>
+			
 		<c:if test="${not empty member and member.id eq dto.writer}">
 			<a href="./delete?num=${dto.num}" class= "btn btn-dark">DELETE</a>
 			<a href="./update?num=${dto.num}" class= "btn btn-dark">UPDATE</a>

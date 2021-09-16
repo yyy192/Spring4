@@ -8,8 +8,16 @@ public class MemberDTO {
 	private String phone;
 	private String email;
 	
+	private MemberFilesDTO memberFilesDTO;
 	
 	//--------------------getter, setter
+	public MemberFilesDTO getMemberFilesDTO() {
+		return memberFilesDTO;
+	}
+	public void setMemberFilesDTO(MemberFilesDTO memberFilesDTO) {
+		this.memberFilesDTO = memberFilesDTO;
+	}
+	
 	public String getId() {
 		return id;
 	}

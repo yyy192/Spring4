@@ -19,7 +19,7 @@
 	
 	<div>
 		<h2>PHOTO</h2>
-		<img alt="" src="../resources/upload/member/${files.fileName}">
+		<img alt="" src="../resources/upload/member/${member.memberFilesDTO.fileName}">
 	</div>
 
 
