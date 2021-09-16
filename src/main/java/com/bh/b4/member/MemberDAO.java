@@ -22,6 +22,10 @@ public class MemberDAO {
 		return sqlSession.delete(NAMESPACE+"setDelete", memberDTO);
 	}
 	
+	public int setFileInsert(MemberFilesDTO memberFilesDTO) throws Exception {
+		return sqlSession.insert(NAMESPACE+"setFileInsert", memberFilesDTO);
+	}
+
 	public int setJoin(MemberDTO memberDTO) throws Exception {
 		return sqlSession.insert(NAMESPACE+"setJoin", memberDTO);
 	}
@@ -32,6 +36,10 @@ public class MemberDAO {
 	
 	public MemberDTO getIdCheck(MemberDTO memberDTO) throws Exception {
 		return sqlSession.selectOne(NAMESPACE+"getIdCheck", memberDTO);
+	}
+	
+	public MemberFilesDTO getFile(MemberDTO memberDTO) throws Exception {
+		return sqlSession.selectOne(NAMESPACE+"getFile", memberDTO);
 	}
 
 }

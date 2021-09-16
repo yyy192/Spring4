@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.bh.b4.board.BoardDAO;
 import com.bh.b4.board.BoardDTO;
+import com.bh.b4.board.BoardFilesDTO;
 import com.bh.b4.util.Pager;
 
 @Repository
@@ -30,6 +31,12 @@ public class QnaDAO implements BoardDAO {
 	}
 
 	@Override
+	public List<BoardFilesDTO> getFiles(BoardDTO boardDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(NAMESPACE+"getFiles", boardDTO);
+	}
+	
+	@Override
 	public BoardDTO getSelect(BoardDTO boardDTO) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(NAMESPACE+"getSelect", boardDTO);
@@ -41,6 +48,12 @@ public class QnaDAO implements BoardDAO {
 		return sqlSession.update(NAMESPACE+"setHitsUpdate", boardDTO);
 	}
 
+	@Override
+	public int setFile(BoardFilesDTO boardFilesDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.insert(NAMESPACE+"setFile", boardFilesDTO);
+	}
+	
 	@Override
 	public int setInsert(BoardDTO boardDTO) throws Exception {
 		// TODO Auto-generated method stub

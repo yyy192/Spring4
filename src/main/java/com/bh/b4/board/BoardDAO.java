@@ -22,6 +22,11 @@ public interface BoardDAO {
 		//글쓰기
 		public int setInsert(BoardDTO boardDTO) throws Exception;
 		
+		//파일
+		public int setFile(BoardFilesDTO boardFilesDTO) throws Exception;
+		
+		public List<BoardFilesDTO> getFiles(BoardDTO boardDTO) throws Exception;
+		
 		//글삭제
 		public int setDelete(BoardDTO boardDTO) throws Exception;
 		

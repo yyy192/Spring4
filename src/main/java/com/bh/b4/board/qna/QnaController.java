@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bh.b4.board.BoardDTO;
+import com.bh.b4.board.BoardFilesDTO;
 import com.bh.b4.util.Pager;
 
 @Controller
@@ -22,7 +24,7 @@ public class QnaController {
 	
 	@ModelAttribute("board")
 	public String getBoard() {
-		return "Qna";
+		return "qna";
 	}
 	
 	@GetMapping("list")
@@ -45,9 +47,9 @@ public class QnaController {
 		return mv;
 	}
 	@PostMapping("insert")
-	public ModelAndView insert(BoardDTO boardDTO) throws Exception {
+	public ModelAndView insert(BoardDTO boardDTO, MultipartFile [] files) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		int result = qnaService.setInsert(boardDTO);
+		int result = qnaService.setInsert(boardDTO, files);
 		
 		mv.setViewName("redirect:./list");
 		return mv;
@@ -78,6 +80,9 @@ public class QnaController {
 		ModelAndView mv = new ModelAndView();
 		
 		boardDTO = qnaService.getSelect(boardDTO);
+		List<BoardFilesDTO> ar = qnaService.getFiles(boardDTO);
+		
+		mv.addObject("fileList", ar);
 		mv.addObject("dto", boardDTO);
 		mv.setViewName("board/select");
 		return mv;
@@ -89,7 +94,14 @@ public class QnaController {
 		
 		int result = qnaService.setDelete(boardDTO);
 		
-		mv.setViewName("redirect:./list");
+		String msg= "삭제가 완료되지 않았습니다.";
+		if(result>0) {
+			msg = "삭제가 완료되었습니다.";
+		}
+		
+		mv.addObject("msg", msg);
+		mv.addObject("url", "./list");
+		mv.setViewName("common/result");
 		
 		return mv;
 	}

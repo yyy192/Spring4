@@ -26,16 +26,18 @@
 				</div>
 				
 				<div class="mb-3">
+				  <label for="writer" class="form-label">WRITER</label>
+				  <input type="text" class="form-control" value="${member.id}" name="writer" id="writer" readonly="readonly">
+				</div>
+				
+				<div class="mb-3">
 				  <label for="contents" class="form-label">CONTENTS</label>
 				  <textarea class="form-control" name="contents" id=contents" rows="5"></textarea>
 				</div>
 				
-				<div class="mb-3">
-				  <label for="writer" class="form-label">WRITER</label>
-				  <input type="text" class="form-control" name="writer" id="writer">
-				</div>
 				
 				<button type="submit">REPLY</button>
+				
 			</form>
 		</div>
 	</div>

@@ -8,7 +8,7 @@
 	<meta charset="UTF-8">
 	<title>RESULT</title>
 	
-	<script type="text/javascript" src="../resources/js/result.js">
+	<script type="text/javascript">
 		alert('${msg}');
 		location.href='${url}';
 	</script>
@@ -22,8 +22,6 @@
 	<input type="hidden" id="msg" value="${msg}">
 	
 <!-- 	<script type="text/javascript" src="../resources/js/result.js">
-		alert('${msg}');
-		location.href='${url}';
 	</script> -->
 </body>
 </html>

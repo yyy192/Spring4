@@ -16,6 +16,11 @@
 	<h2>NAME : ${member.name}</h2>
 	<h2>PHONE : ${member.phone}</h2>
 	<h2>EMAIL : ${member.email}</h2>
+	
+	<div>
+		<h2>PHOTO</h2>
+		<img alt="" src="../resources/upload/member/${files.fileName}">
+	</div>
 
 
 	<a href="./update">정보 수정</a>

@@ -5,6 +5,14 @@
   
   <mapper namespace="com.bh.b4.member.MemberDAO">
   
+  	<select id="getFile" parameterType="MemberDTO" resultType="MemberFilesDTO">
+  		select * from memberFiles where id=#{id}
+  	</select>
+  	
+  	<insert id="setFileInsert" parameterType="MemberFilesDTO">
+  		INSERT INTO MEMBERFILES VALUES(FILES_SEQ.nextval, #{id}, #{fileName}, #{oriName})
+  	</insert>
+  	
   	<update id="setUpdate" parameterType="MemberDTO">
   		update member set pw=#{pw}, phone=#{phone}, email=#{email} where id=#{id}
   	</update>

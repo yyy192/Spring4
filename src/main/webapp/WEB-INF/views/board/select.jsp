@@ -41,15 +41,21 @@
 				</tr>
 			</table>
 			
-			
+		<c:forEach items="${fileList}" var="f">
+			<div>
+				<img alt="" src="../resources/upload/${board}/${f.fileName}">
+			</div>
+		</c:forEach>	
 		<c:if test="${not empty member and member.id eq dto.writer}">
 			<a href="./delete?num=${dto.num}" class= "btn btn-dark">DELETE</a>
 			<a href="./update?num=${dto.num}" class= "btn btn-dark">UPDATE</a>
 		</c:if>
 		
 		
-		<c:if test="${board ne 'Notice'}">
+		<c:if test="${board ne 'notice'}">
+			<c:if test="${not empty member}">
 			<a href="./reply?num=${dto.num}" class= "btn btn-dark">REPLY</a>
+			</c:if>
 		</c:if>
 		</div>
 	</div>

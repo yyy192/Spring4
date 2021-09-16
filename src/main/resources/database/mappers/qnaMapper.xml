@@ -5,6 +5,10 @@
   
   <mapper namespace="com.bh.b4.board.qna.QnaDAO">
   
+  	<insert id="setFile">
+  		INSERT INTO QNAFILES VALUES(FILES_SEQ.NEXTVAL, #{num}, #{fileName}, #{oriName})
+  	</insert>
+  	
   	<select id="getCount" resultType="java.lang.Long" parameterType="com.bh.b4.util.Pager">
   		SELECT COUNT(NUM) FROM QNA
   		WHERE 
@@ -57,12 +61,19 @@
 		WHERE R BETWEEN #{startRow} AND #{lastRow}
   	</select>
   	
+  	<select id="getFiles" parameterType="BoardDTO" resultType="BoardFilesDTO">
+  		SELECT * FROM QNAFILES WHERE NUM=#{num}
+  	</select>
+  	
   	<select id="getSelect" parameterType="BoardDTO" resultType="QnaDTO">
   		SELECT * FROM QNA WHERE NUM=#{num}
   	</select>
   	
   	<insert id="setInsert" parameterType="BoardDTO">
-  		INSERT INTO QNA VALUES(QNA_SEQ.NEXTVAL, #{title}, #{contents}, #{writer}, SYSDATE, 0, QNA_SEQ.CURRVAL, 0, 0)	
+  		<selectKey keyProperty="num" resultType="Long" order="BEFORE">
+  			select qna_seq.nextval from dual
+  		</selectKey>
+  		INSERT INTO QNA VALUES(#{num}, #{title}, #{contents}, #{writer}, SYSDATE, 0, QNA_SEQ.CURRVAL, 0, 0)	
   	</insert>
   	
   	<delete id="setDelete" parameterType="BoardDTO">

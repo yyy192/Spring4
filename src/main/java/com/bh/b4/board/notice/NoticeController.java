@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bh.b4.board.BoardDTO;
+import com.bh.b4.board.BoardFilesDTO;
 import com.bh.b4.util.Pager;
 
 @Controller
@@ -22,7 +24,7 @@ public class NoticeController {
 	
 	@ModelAttribute("board")
 	public String getBoard() {
-		return "Notice";
+		return "notice";
 	}
 	
 	@GetMapping("list")
@@ -44,9 +46,14 @@ public class NoticeController {
 		return mv;
 	}
 	@PostMapping("insert")
-	public ModelAndView insert(BoardDTO boardDTO) throws Exception {
+	public ModelAndView insert(BoardDTO boardDTO, MultipartFile [] files) throws Exception {
+		//oriName 출력해보기
+		for(MultipartFile muFile : files) {
+				System.out.println(muFile.getOriginalFilename());
+		}
+		
 		ModelAndView mv = new ModelAndView();
-		int result = noticeService.setInsert(boardDTO);
+		int result = noticeService.setInsert(boardDTO, files);
 		
 		mv.setViewName("redirect:./list");
 		return mv;
@@ -57,6 +64,8 @@ public class NoticeController {
 		ModelAndView mv = new ModelAndView();
 		
 		boardDTO = noticeService.getSelect(boardDTO);
+		List<BoardFilesDTO> ar = noticeService.getFiles(boardDTO);
+		mv.addObject("fileList", ar);
 		mv.addObject("dto", boardDTO);
 		mv.setViewName("board/select");
 		return mv;
@@ -67,8 +76,14 @@ public class NoticeController {
 		ModelAndView mv = new ModelAndView();
 		
 		int result = noticeService.setDelete(boardDTO);
+		String msg= "삭제가 완료되지 않았습니다.";
+		if(result>0) {
+			msg = "삭제가 완료되었습니다.";
+		}
 		
-		mv.setViewName("redirect:./list");
+		mv.addObject("msg", msg);
+		mv.addObject("url", "./list");
+		mv.setViewName("common/result");
 		
 		return mv;
 	}
