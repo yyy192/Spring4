@@ -7,13 +7,26 @@
 <head>
 	<meta charset="UTF-8">
 	<title>INSERT</title>
+	
 	<c:import url="../temp/boot_head.jsp"></c:import>
+	
+	<!-- include libraries(jQuery, bootstrap) -->
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	
+	
+	<!-- include summernote css/js -->
+	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+	
 	<style type="text/css">
-		#d1 {
+	
+		/* #d1 {
 			width : 300px;
 			height: 300px;
 			background-color: yellow;
-		}
+		} */
 	</style>
 </head>
 <body>
@@ -35,7 +48,7 @@
 				
 				<div class="mb-3">
 				  <label for="contents" class="form-label">CONTENTS</label>
-				  <textarea class="form-control" name="contents" id=contents" rows="5"></textarea>
+				  <textarea class="form-control" name="contents" id="contents" rows="5"></textarea>
 				</div>
 			
 				<!-- button 추가 -->
@@ -51,23 +64,25 @@
 		</div>
 	</div>
 	
-	<!-- <div id="d1">
+<!-- 	<div id="d1">
 		<button id="c1">CLICK</button>
 	</div> -->
 	
 <script type="text/javascript" src="../resources/js/boardFile.js">
 	//코드 작성 금지
 </script>
-<!-- <script type="text/javascript">
 
+<script type="text/javascript">
+
+	$('#contents').summernote();
 	
-	$("#d1").click(function(){
+	/* $("#d1").click(function(){
 		alert('d1');
 	});
 	
 	$("#c1").click(function(){
 		alert('c1');
-	});
-</script> -->
+	}); */
+</script>
 </body>
 </html>

@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bh.b4.board.BoardDTO;
 import com.bh.b4.board.BoardFilesDTO;
+import com.bh.b4.util.FileDown;
 import com.bh.b4.util.Pager;
 
 @Controller
@@ -25,6 +26,15 @@ public class NoticeController {
 	@ModelAttribute("board")
 	public String getBoard() {
 		return "notice";
+	}
+	
+	@GetMapping("down")
+	public ModelAndView fileDown(BoardFilesDTO boardFilesDTO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		mv.addObject("dto", boardFilesDTO);
+		mv.setViewName("fileDown");
+		return mv;
 	}
 	
 	@GetMapping("list")

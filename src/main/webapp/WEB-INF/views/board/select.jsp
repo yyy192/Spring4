@@ -16,14 +16,16 @@
 		<div class="col-md-7 my-2 mx-auto">
 			<h3>Num : ${dto.num}</h3>
 			<h3>Title : ${dto.title}</h3>
-			<h3>Contents : ${dto.contents}</h3>>
 			<h3>Writer : ${dto.writer}</h3>
+			<div>
+				${dto.contents}
+			</div>
 			<h3>RegDate : ${dto.regDate}</h3>
 			<h3>Hits : ${dto.hits}</h3>
 			
 		<c:forEach items="${dto.files}" var="f">
 			<div>
-				<img alt="" src="../resources/upload/${board}/${f.fileName}">
+				<a href="./down?fileName=${f.fileName}">${f.oriName}</a>
 			</div>
 		</c:forEach>
 			
