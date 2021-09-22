@@ -8,7 +8,6 @@
 	<title>JOIN</title>
 	
 	<c:import url="../temp/boot_head.jsp"></c:import>
-	
 </head>
 <body>
 	<c:import url="../temp/boot_nav.jsp"></c:import>
@@ -66,6 +65,7 @@
 	
 <script type="text/javascript" src="../resources/js/file.js"></script>	
 <script type="text/javascript" src="../resources/js/join.js"></script>
+
 
 </body>
 </html>

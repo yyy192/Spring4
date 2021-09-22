@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bh.b4.board.BoardDTO;
 import com.bh.b4.board.BoardFilesDTO;
+import com.bh.b4.board.CommentsDTO;
 import com.bh.b4.util.FileDown;
 import com.bh.b4.util.Pager;
 
@@ -69,13 +70,30 @@ public class NoticeController {
 		return mv;
 	}
 	
+	//setComments
+	@PostMapping("comments") 
+	public ModelAndView comments(CommentsDTO commentsDTO) throws Exception { 
+		ModelAndView mv = new ModelAndView();
+
+		int result = noticeService.setComments(commentsDTO);
+		
+		mv.setViewName("redirect:./list");
+		return mv;
+	  
+	}
+	 
+	
 	@GetMapping("select")
 	public ModelAndView select(BoardDTO boardDTO) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		
 		boardDTO = noticeService.getSelect(boardDTO);
 		//List<BoardFilesDTO> ar = noticeService.getFiles(boardDTO);
 		//mv.addObject("fileList", ar);
+		List<CommentsDTO> ar = noticeService.getComments();
+		 
+		
+		//mv.addObject("pager", pager);
+		mv.addObject("commentsList", ar);
 		mv.addObject("dto", boardDTO);
 		mv.setViewName("board/select");
 		return mv;

@@ -4,6 +4,19 @@
 
  //join버튼 눌렀을 때 id, pw, name, email, phone이 비어있으면 X
 
+$('#id').blur(function(){
+	let id = $('#id').val();
+	//
+	$.get("./idCheckAjax?id="+id, function(result){
+		result = result.trim();
+		if(result=='1'){
+			$('#idResult').html('사용 가능한 ID 입니다.');
+		}else{
+			$('#idResult').html('사용 불가능한 ID 입니다.');
+		}
+	});
+});
+	
 $("#btn").click(function(){
 	
 	let result = true;
@@ -24,4 +37,3 @@ $("#btn").click(function(){
 		$(t).focus();
 	} 
 });
- 

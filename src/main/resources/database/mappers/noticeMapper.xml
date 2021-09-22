@@ -5,6 +5,15 @@
   
   <mapper namespace="com.bh.b4.board.notice.NoticeDAO">
   	
+  	
+  	<select id="getComments" resultType="CommentsDTO">
+  		SELECT * FROM COMMENTS
+  	</select>
+  	
+  	<insert id="setComments" parameterType="CommentsDTO">
+  		INSERT INTO COMMENTS VALUES(COMMENTS_SEQ.NEXTVAL, #{num}, #{writer}, #{contents}, SYSDATE, #{board})
+  	</insert>
+  	
   	<insert id="setFile" parameterType="BoardFilesDTO">
   		INSERT INTO NOTICEFILES VALUES(FILES_SEQ.NEXTVAL, #{num}, #{fileName}, #{oriName})
   	</insert>

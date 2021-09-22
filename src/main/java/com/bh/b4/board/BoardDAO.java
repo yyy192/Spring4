@@ -32,5 +32,4 @@ public interface BoardDAO {
 		
 		//글수정
 		public int setUpdate(BoardDTO boardDTO) throws Exception;
-
 }

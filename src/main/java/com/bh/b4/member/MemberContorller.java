@@ -110,6 +110,30 @@ public class MemberContorller {
 		return mv;
 	}
 	
+	@GetMapping("check")
+	public ModelAndView check() throws Exception {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("member/check");
+		return mv;
+	}
+	
+	@GetMapping("idCheckAjax")
+	public ModelAndView idCheckAjax(MemberDTO memberDTO) throws Exception {
+		//중복 검사 할 id 출력
+		System.out.println(memberDTO.getId());
+		memberDTO = memberService.getIdCheck(memberDTO);
+		
+		//1이면 사용 가능, 0이면 사용 불가능(중복)
+		int result=0;
+		if(memberDTO == null) {
+			result = 1;
+		}
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("result", result);
+		mv.setViewName("common/ajaxResult");
+		return mv;
+	}
+	
 	@GetMapping("idCheck")
 	public ModelAndView idCheck(MemberDTO memberDTO) throws Exception {
 		ModelAndView mv = new ModelAndView();
@@ -118,15 +142,6 @@ public class MemberContorller {
 		
 		mv.addObject("dto", memberDTO);
 		mv.setViewName("member/idCheck");
-		return mv;
-	}
-	
-	
-	
-	@GetMapping("check")
-	public ModelAndView check() throws Exception {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("member/check");
 		return mv;
 	}
 	

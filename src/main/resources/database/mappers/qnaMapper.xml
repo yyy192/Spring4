@@ -5,6 +5,14 @@
   
   <mapper namespace="com.bh.b4.board.qna.QnaDAO">
   
+ 	<select id="getComments" resultType="CommentsDTO">
+  		SELECT * FROM COMMENTS
+  	</select>
+  	
+  	<insert id="setComments" parameterType="CommentsDTO">
+  		INSERT INTO COMMENTS VALUES(COMMENTS_SEQ.NEXTVAL, #{num}, #{writer}, #{contents}, SYSDATE, #{board})
+  	</insert>
+  	
   	<insert id="setFile">
   		INSERT INTO QNAFILES VALUES(FILES_SEQ.NEXTVAL, #{num}, #{fileName}, #{oriName})
   	</insert>

@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.bh.b4.board.BoardDTO;
 import com.bh.b4.board.BoardFilesDTO;
 import com.bh.b4.board.BoardService;
+import com.bh.b4.board.CommentsDTO;
 import com.bh.b4.util.FileManager;
 import com.bh.b4.util.Pager;
 
@@ -25,6 +26,19 @@ public class QnaService implements BoardService {
 	@Autowired
 	private FileManager fileManager;
 
+	
+	public int setComments(CommentsDTO commentsDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return qnaDAO.setComments(commentsDTO);
+	}
+	
+	
+	public List<CommentsDTO> getComments() throws Exception {
+		
+		return qnaDAO.getComments();
+	}
+	
+		
 	@Override
 	public List<BoardDTO> getList(Pager pager) throws Exception {
 		// TODO Auto-generated method stub

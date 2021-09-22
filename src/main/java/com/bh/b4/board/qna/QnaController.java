@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bh.b4.board.BoardDTO;
 import com.bh.b4.board.BoardFilesDTO;
+import com.bh.b4.board.CommentsDTO;
 import com.bh.b4.util.Pager;
 
 @Controller
@@ -73,7 +74,17 @@ public class QnaController {
 		return mv;
 	}
 	
-	
+	//setComments
+	@PostMapping("comments") 
+	public ModelAndView comments(CommentsDTO commentsDTO) throws Exception { 
+		ModelAndView mv = new ModelAndView();
+
+		int result = qnaService.setComments(commentsDTO);
+			
+		mv.setViewName("redirect:./list");
+		return mv;
+		  
+	}
 	
 	@GetMapping("select")
 	public ModelAndView select(BoardDTO boardDTO) throws Exception {
@@ -82,6 +93,10 @@ public class QnaController {
 		boardDTO = qnaService.getSelect(boardDTO);
 		//List<BoardFilesDTO> ar = qnaService.getFiles(boardDTO);
 		
+		List<CommentsDTO> ar = qnaService.getComments();
+		 
+		
+		mv.addObject("commentsList", ar);
 		//mv.addObject("fileList", ar);
 		mv.addObject("dto", boardDTO);
 		mv.setViewName("board/select");
