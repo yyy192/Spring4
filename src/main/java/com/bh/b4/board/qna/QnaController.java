@@ -74,6 +74,19 @@ public class QnaController {
 		return mv;
 	}
 	
+	//getCommnets
+	@GetMapping("getComments")
+	public ModelAndView getComments(CommentsDTO commentsDTO, Pager pager) throws Exception {
+		//commentsDTO.setBoard("notice");
+		List<CommentsDTO> ar = qnaService.getComments(commentsDTO, pager);
+		ModelAndView mv = new ModelAndView();
+			
+		mv.addObject("pager", pager);
+		mv.addObject("comments", ar);
+		mv.setViewName("common/ajaxList");
+		return mv;
+	}
+		
 	//setComments
 	@PostMapping("comments") 
 	public ModelAndView comments(CommentsDTO commentsDTO) throws Exception { 
@@ -81,22 +94,23 @@ public class QnaController {
 
 		int result = qnaService.setComments(commentsDTO);
 			
-		mv.setViewName("redirect:./list");
+		mv.setViewName("common/ajaxResult");
+		mv.addObject("result", result);
 		return mv;
 		  
 	}
 	
 	@GetMapping("select")
-	public ModelAndView select(BoardDTO boardDTO) throws Exception {
+	public ModelAndView select(BoardDTO boardDTO, CommentsDTO commentsDTO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
 		boardDTO = qnaService.getSelect(boardDTO);
 		//List<BoardFilesDTO> ar = qnaService.getFiles(boardDTO);
 		
-		List<CommentsDTO> ar = qnaService.getComments();
+		//List<CommentsDTO> ar = qnaService.getComments(commentsDTO);
 		 
 		
-		mv.addObject("commentsList", ar);
+		//mv.addObject("commentsList", ar);
 		//mv.addObject("fileList", ar);
 		mv.addObject("dto", boardDTO);
 		mv.setViewName("board/select");

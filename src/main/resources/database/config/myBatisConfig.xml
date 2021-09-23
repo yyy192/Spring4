@@ -17,6 +17,7 @@
  		<typeAlias type="com.bh.b4.util.Pager" alias="Pager"/>
  		
  		<typeAlias type="java.util.List" alias="List"/>
+ 		<typeAlias type="java.util.Map" alias="Map"/>
  		<typeAlias type="java.lang.Long" alias="Long"/>
  	</typeAliases>
  

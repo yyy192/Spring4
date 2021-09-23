@@ -1,6 +1,7 @@
 package com.bh.b4.board.notice;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -31,15 +32,33 @@ public class NoticeService implements BoardService {
 	
 	
 	
+	public int setCommentsDelete(CommentsDTO commentsDTO) throws Exception {
+		return noticeDAO.setCommentsDelete(commentsDTO);	
+	}
+	
+	@Override
 	public int setComments(CommentsDTO commentsDTO) throws Exception {
 		// TODO Auto-generated method stub
 		return noticeDAO.setComments(commentsDTO);
 	}
 	
-	
-	public List<CommentsDTO> getComments() throws Exception {
+	@Override
+	public List<CommentsDTO> getComments(CommentsDTO commentsDTO, Pager pager) throws Exception {
+		pager.setPerPage(5L);
+		pager.makeRow();
 		
-		return noticeDAO.getComments();
+		//댓글의 총 개수 구하기
+		//System.out.println(commentsDTO.getNum());
+		//System.out.println(totalCount);
+		
+		Long totalCount = noticeDAO.getCommentsCount(commentsDTO);
+		pager.makeNum(totalCount);
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("comments", commentsDTO);
+		map.put("pager", pager);
+		return noticeDAO.getComments(map);
 	}
 	
 	@Override

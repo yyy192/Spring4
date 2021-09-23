@@ -7,9 +7,9 @@ public class Pager {
 	private String search;
 	
 	private Long pn;
-	//한 페이지에 출력할 리스트의 글 개수 - 10
+	//한 페이지에 출력할 리스트의 글 개수
 	private Long perPage;
-	//한 페이지에 출력할 pn의 개수 - 5
+	//한 페이지에 출력할 pn의 개수
 	private Long perBlock;
 	
 	// RowNum Mapper에서 사용
@@ -112,7 +112,9 @@ public class Pager {
 	}
 
 	public Long getPerBlock() {
-		this.perBlock = 5L;
+		if(this.perBlock==null || this.perBlock==0) {
+			this.perBlock=5L;
+		}
 		return perBlock;
 	}
 
@@ -121,10 +123,10 @@ public class Pager {
 	}
 	
 	public Long getPerPage() {
-		this.perPage=10L;
-//		if(this.perPage==null || this.perPage==0) {
-//			this.perPage=10L;
-//		}
+		//this.perPage=10L;
+		if(this.perPage==null || this.perPage==0) {
+			this.perPage=10L;
+		}
 		return perPage;
 	}
 

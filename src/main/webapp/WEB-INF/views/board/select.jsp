@@ -7,6 +7,11 @@
 	<meta charset="UTF-8">
 	<title>SELECT</title>
 	<c:import url="../temp/boot_head.jsp"></c:import>
+	<style type="text/css">
+		.more {
+			cursor: pointer;
+		}
+	</style>
 </head>
 <body>
 	<c:import url="../temp/boot_nav.jsp"></c:import></head>
@@ -32,16 +37,8 @@
 		<!-- 댓글 목록 -->
 		<hr>
 		<h5>Comments</h5>
-			<div class = "container-fluid">
-				<c:forEach items="${commentsList}" var="comments">
-						<c:if test="${comments.board eq board and comments.num eq dto.num}">
-							<li class="list-group list-group-flush list-group-item">
-							작성자 : ${comments.writer}
-							작성날짜 : ${comments.regDate}
-							<div>${comments.contents}</div>
-							</li>
-						</c:if>
-				</c:forEach>
+			<div id="commentsList" data-board-num="${dto.num}" class = "container-fluid">
+				
 			
 			</div>
 		<hr>
@@ -80,6 +77,58 @@
 	</div>
 	
 <script type="text/javascript">
+	
+	getComments(1);
+	
+	//DEL click event 등록
+	$('#commentsList').on("click", ".cdel", function(){
+		let commentNum = $(this).attr("data-comment-del");
+		console.log(commentNum);
+		$.ajax({
+			type: "GET",
+			url: "./commentDel",
+			data: {
+				commentNum:commentNum
+			},
+			success: function(result){
+				result = result.trim();
+			
+				getComments(1);
+			},
+			error:function(xhr, status, error){
+				console.log(error);
+			}
+			
+			
+		});
+	});
+	
+	$('#commentsList').on("click", ".more", function(){
+		//data-comment-pn 값을 출력
+		let pn = $(this).attr("data-comment-pn");
+		getComments(pn);
+	});
+	
+	function getComments(pn) {
+		let num = $("#commentsList").attr("data-board-num");
+		$.ajax({
+			type: "GET",
+			url : "./getComments",
+			data : {
+				num:num,
+				pn: pn
+			},
+			success: function(result){
+				result=result.trim();
+				$("#commentsList").html(result);
+			},
+			error:function(xhr, status, error){
+				console.log(error);
+			}
+			
+		});
+	}
+	
 	$('#comments').click(function(){
 		//작성자, 내용을 console에 출력
 		let writer = $('#writer').val();
@@ -92,8 +141,12 @@
 			
 			//댓글 입력 후 contents창 빈칸으로 만들기
 			$('#contents').val('');
+			//입력 후 다시 가져오기
+			getComments();
 		});
 	});
+	
+	
 	
 </script>
 </body>

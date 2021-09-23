@@ -5,9 +5,22 @@
   
   <mapper namespace="com.bh.b4.board.notice.NoticeDAO">
   	
+  	<delete id="setCommentsDelete" parameterType="CommentsDTO">
+  		DELETE COMMENTS WHERE COMMENTNUM=#{commentNum}
+  	</delete>
   	
-  	<select id="getComments" resultType="CommentsDTO">
-  		SELECT * FROM COMMENTS
+  	<select id="getCommentsCount" resultType="Long" parameterType="CommentsDTO">
+  		SELECT COUNT(COMMENTNUM) FROM COMMENTS
+		WHERE NUM=#{num} and BOARD='notice'
+  	</select>
+  	
+  	<select id="getComments" resultType="CommentsDTO" parameterType="Map">
+	  	SELECT * FROM
+	  		(SELECT rowNum R, C.* FROM
+		  		(SELECT * FROM COMMENTS 
+		  		WHERE BOARD='notice' and NUM=#{comments.num}
+		  		ORDER BY COMMENTNUM ASC) C)
+		 WHERE R BETWEEN #{pager.startRow} AND #{pager.lastRow}
   	</select>
   	
   	<insert id="setComments" parameterType="CommentsDTO">

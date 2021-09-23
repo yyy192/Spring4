@@ -5,8 +5,18 @@
   
   <mapper namespace="com.bh.b4.board.qna.QnaDAO">
   
- 	<select id="getComments" resultType="CommentsDTO">
-  		SELECT * FROM COMMENTS
+ 	<select id="getCommentsCount" resultType="Long" parameterType="CommentsDTO">
+  		SELECT COUNT(COMMENTNUM) FROM COMMENTS
+		WHERE NUM=#{num} and BOARD='qna'
+  	</select>
+  	
+  	<select id="getComments" resultType="CommentsDTO" parameterType="Map">
+	  	SELECT * FROM
+	  		(SELECT rowNum R, C.* FROM
+		  		(SELECT * FROM COMMENTS 
+		  		WHERE BOARD='qna' and NUM=#{comments.num}
+		  		ORDER BY COMMENTNUM ASC) C)
+		 WHERE R BETWEEN #{pager.startRow} AND #{pager.lastRow}
   	</select>
   	
   	<insert id="setComments" parameterType="CommentsDTO">

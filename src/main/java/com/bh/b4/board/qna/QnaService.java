@@ -1,6 +1,7 @@
 package com.bh.b4.board.qna;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -26,16 +27,29 @@ public class QnaService implements BoardService {
 	@Autowired
 	private FileManager fileManager;
 
-	
+	@Override
 	public int setComments(CommentsDTO commentsDTO) throws Exception {
 		// TODO Auto-generated method stub
 		return qnaDAO.setComments(commentsDTO);
 	}
 	
-	
-	public List<CommentsDTO> getComments() throws Exception {
+	@Override
+	public List<CommentsDTO> getComments(CommentsDTO commentsDTO, Pager pager) throws Exception {
+		pager.setPerPage(5L);
+		pager.makeRow();
 		
-		return qnaDAO.getComments();
+		//댓글의 총 개수 구하기
+		//System.out.println(commentsDTO.getNum());
+		//System.out.println(totalCount);
+		
+		Long totalCount = qnaDAO.getCommentsCount(commentsDTO);
+		pager.makeNum(totalCount);
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("comments", commentsDTO);
+		map.put("pager", pager);
+		return qnaDAO.getComments(map);
 	}
 	
 		

@@ -2,6 +2,8 @@ package com.bh.b4.board.notice;
 
 import java.util.List;
 
+import javax.lang.model.element.ModuleElement;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -70,14 +72,27 @@ public class NoticeController {
 		return mv;
 	}
 	
+	//getCommnets
+	@GetMapping("getComments")
+	public ModelAndView getComments(CommentsDTO commentsDTO, Pager pager) throws Exception {
+		//commentsDTO.setBoard("notice");
+		List<CommentsDTO> ar = noticeService.getComments(commentsDTO, pager);
+		ModelAndView mv = new ModelAndView();
+		
+		mv.addObject("pager", pager);
+		mv.addObject("comments", ar);
+		mv.setViewName("common/ajaxList");
+		return mv;
+	}
+	
 	//setComments
 	@PostMapping("comments") 
 	public ModelAndView comments(CommentsDTO commentsDTO) throws Exception { 
 		ModelAndView mv = new ModelAndView();
-
 		int result = noticeService.setComments(commentsDTO);
 		
-		mv.setViewName("redirect:./list");
+		mv.setViewName("common/ajaxResult");
+		mv.addObject("result", result);
 		return mv;
 	  
 	}
@@ -89,13 +104,27 @@ public class NoticeController {
 		boardDTO = noticeService.getSelect(boardDTO);
 		//List<BoardFilesDTO> ar = noticeService.getFiles(boardDTO);
 		//mv.addObject("fileList", ar);
-		List<CommentsDTO> ar = noticeService.getComments();
-		 
+		
+		//1.
+		//List<CommentsDTO> comments = noticeService.getComments();
+		//mv.addObject("commentsList", comments); 
+		
+		//2.comments를 select 다 뿌려지고 난 뒤 ajax실행
 		
 		//mv.addObject("pager", pager);
-		mv.addObject("commentsList", ar);
 		mv.addObject("dto", boardDTO);
 		mv.setViewName("board/select");
+		return mv;
+	}
+	
+	@GetMapping("commentDel")
+	public ModelAndView setCommentsDelete(CommentsDTO commentsDTO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		int result = noticeService.setCommentsDelete(commentsDTO);
+		mv.setViewName("common/ajaxResult");
+		mv.addObject("result", result);
+		
 		return mv;
 	}
 	

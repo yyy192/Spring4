@@ -28,5 +28,9 @@ public interface BoardService {
 	//글수정
 	public int setUpdate(BoardDTO boardDTO) throws Exception;
 
-
+	//댓글리스트
+	public List<CommentsDTO> getComments(CommentsDTO commentsDTO, Pager pager) throws Exception;
+	
+	//댓글작성
+	public int setComments(CommentsDTO commentsDTO) throws Exception;
 }

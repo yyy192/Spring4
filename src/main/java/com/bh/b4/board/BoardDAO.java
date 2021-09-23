@@ -1,6 +1,7 @@
 package com.bh.b4.board;
 
 import java.util.List;
+import java.util.Map;
 
 import com.bh.b4.util.Pager;
 
@@ -32,4 +33,12 @@ public interface BoardDAO {
 		
 		//글수정
 		public int setUpdate(BoardDTO boardDTO) throws Exception;
+		
+		//댓글리스트
+		public List<CommentsDTO> getComments(Map<String, Object> map) throws Exception;
+		
+		//댓글 총 개수
+		public Long getCommentsCount(CommentsDTO commentsDTO) throws Exception;
+		//댓글작성
+		public int setComments(CommentsDTO commentsDTO) throws Exception;
 }
