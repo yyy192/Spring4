@@ -35,9 +35,9 @@
 			<div class = "container-fluid">
 				<c:forEach items="${commentsList}" var="comments">
 						<c:if test="${comments.board eq board and comments.num eq dto.num}">
-							<li>
-							writer : ${comments.writer}
-							regDate : ${comments.regDate}
+							<li class="list-group list-group-flush list-group-item">
+							작성자 : ${comments.writer}
+							작성날짜 : ${comments.regDate}
 							<div>${comments.contents}</div>
 							</li>
 						</c:if>
@@ -89,6 +89,9 @@
 		
 		$.post('./comments', {writer:writer, contents:contents, board:board, num:num}, function(result){
 			console.log(result.trim());
+			
+			//댓글 입력 후 contents창 빈칸으로 만들기
+			$('#contents').val('');
 		});
 	});
 	
