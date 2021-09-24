@@ -20,9 +20,12 @@ public class NoticeDAO implements BoardDAO {
 	private SqlSession sqlSession;
 	private final String NAMESPACE="com.bh.b4.board.notice.NoticeDAO.";
 
+	public int setCommentsUpdate(CommentsDTO commentsDTO) throws Exception {
+		return sqlSession.update(NAMESPACE+"setCommentsUpdate", commentsDTO);
+	}
 	
 	public int setCommentsDelete(CommentsDTO commentsDTO) throws Exception {
-	return sqlSession.delete(NAMESPACE+"setCommentsDelete", commentsDTO);	
+		return sqlSession.delete(NAMESPACE+"setCommentsDelete", commentsDTO);	
 	}
 	
 	@Override

@@ -80,27 +80,99 @@
 	
 	getComments(1);
 	
+	let content = '';		
+	//UPDATE click event 등록
+	$('#commentsList').on("click", ".cupdate", function(){
+		let commentNum = $(this).attr("data-comment-update");
+		let ta = '<textarea class="form-control" name="contents" rows="2">';
+		content = $("#content"+commentNum).text().trim();
+		$("#content"+commentNum).children().css('display', 'none');
+		ta = ta+content.trim() +'</textarea>';
+		ta = ta+'<button class="mb-3 btn btn-outline-secondary up" type="button">update</button>';
+		ta = ta+'<button class="mb-3 btn btn-outline-secondary can" type="button">cancel</button>';
+		$("#content"+commentNum).append(ta);
+		
+		
+		
+	});
+	
+	$('#commentsList').on("click", ".can", function(){
+		alert('취소?');
+		if(alert){
+			console.log(content);
+			$(this).parent().children('div').css('display', 'block');
+			$(this).parent().children('textarea').remove();
+			$(this).parent().children('button').remove();
+		}
+	});
+	
+	$('#commentsList').on("click", ".up", function(){
+		alert('수정?');
+		if(alert){
+			let contents=$(this).prev().val();
+			let cn = $(this).parent().prev().text().trim();
+			console.log(contents);
+			console.log(cn);
+			$.ajax({
+				type: "POST",
+				url: "./commentUpdate",
+				data: {
+					contents:contents,
+					commentNum:cn
+				},
+				success: function(result){
+					result=result.trim();
+					if(result>0){
+						alert('수정 성공!');
+						getComments(1);
+					}else{
+						alert('수정 실패!');
+					}
+				},
+				error:function(xhr, status, error){
+					alert('수정 실패!');
+				}
+				
+			});
+		}else{
+			alert('수정 실패');
+		}
+		
+	});
+	
+	
 	//DEL click event 등록
 	$('#commentsList').on("click", ".cdel", function(){
 		let commentNum = $(this).attr("data-comment-del");
 		console.log(commentNum);
-		$.ajax({
-			type: "GET",
-			url: "./commentDel",
-			data: {
-				commentNum:commentNum
-			},
-			success: function(result){
-				result = result.trim();
-			
-				getComments(1);
-			},
-			error:function(xhr, status, error){
-				console.log(error);
-			}
-			
-			
-		});
+		alert('삭제?');
+		if(alert){
+			$.ajax({
+				type: "POST",
+				url: "./commentDel",
+				data: {
+					commentNum:commentNum
+				},
+				success: function(result){
+					result = result.trim();
+					
+					if(result>0){
+						alert('삭제 성공!');
+						getComments(1);
+					}else{
+						alert('삭제 실패!')
+					}
+				},
+				error:function(xhr, status, error){
+					alert('삭제 실패!');
+				}
+				
+				
+			});
+		}else{
+			alert('삭제 안됨');
+		}
+		
 	});
 	
 	$('#commentsList').on("click", ".more", function(){
@@ -108,6 +180,8 @@
 		let pn = $(this).attr("data-comment-pn");
 		getComments(pn);
 	});
+	
+	
 	
 	function getComments(pn) {
 		let num = $("#commentsList").attr("data-board-num");

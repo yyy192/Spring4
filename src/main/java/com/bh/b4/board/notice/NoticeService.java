@@ -31,6 +31,9 @@ public class NoticeService implements BoardService {
 	private FileManager fileManager;
 	
 	
+	public int setCommentsUpdate(CommentsDTO commentsDTO) throws Exception {
+		return noticeDAO.setCommentsUpdate(commentsDTO);
+	}
 	
 	public int setCommentsDelete(CommentsDTO commentsDTO) throws Exception {
 		return noticeDAO.setCommentsDelete(commentsDTO);	

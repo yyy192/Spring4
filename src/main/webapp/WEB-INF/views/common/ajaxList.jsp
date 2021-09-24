@@ -7,12 +7,17 @@
 	
 		<tr>
 			<td>${comment.commentNum}</td>
+			<td id="content${comment.commentNum}">
+				<%-- <textarea class="form-control" readonly="readonly" name="contents" id="contents" rows="2">${comment.contents}</textarea> --%>
+				<div>
+					${comment.contents}
+				</div>
+			</td>
 			<td>작성자 : ${comment.writer}, 작성날짜 : ${comment.regDate}</td>
-			<td>${comment.contents}</td>
 			
 			<c:if test="${not empty member and member.id eq comment.writer}">
 				<td><button class="cdel" data-comment-del="${comment.commentNum}">삭제</button></td>
-				<td><button >수정</button></td>
+				<td><button class="cupdate" data-comment-update="${comment.commentNum}">수정</button></td>
 			</c:if>
 			
 		</tr>

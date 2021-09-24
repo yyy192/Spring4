@@ -5,6 +5,12 @@
   
   <mapper namespace="com.bh.b4.board.notice.NoticeDAO">
   	
+  	
+  	<update id="setCommentsUpdate" parameterType="CommentsDTO">
+  		UPDATE COMMENTS SET CONTENTS=#{contents} 
+  		WHERE COMMENTNUM=#{commentNum} AND BOARD='notice'
+  	</update>
+  	
   	<delete id="setCommentsDelete" parameterType="CommentsDTO">
   		DELETE COMMENTS WHERE COMMENTNUM=#{commentNum}
   	</delete>
