@@ -124,7 +124,11 @@
 					result=result.trim();
 					if(result>0){
 						alert('수정 성공!');
-						getComments(1);
+						//getComments(1);
+						selector.parent().children('div').text(contents);
+						selector.parent().children('div').css('display', 'block');
+						selector.parent().children('textarea').remove();
+						selector.parent().children('button').remove();
 					}else{
 						alert('수정 실패!');
 					}
