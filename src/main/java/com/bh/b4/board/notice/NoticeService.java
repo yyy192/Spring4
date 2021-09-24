@@ -30,6 +30,17 @@ public class NoticeService implements BoardService {
 	@Autowired
 	private FileManager fileManager;
 	
+	public int setFileDelete(BoardFilesDTO boardFilesDTO) throws Exception {
+		//폴더에서 파일 지우기
+		String realPath = servletContext.getRealPath("/resources/upload/notice/");
+		String fileName = boardFilesDTO.getFileName();
+		
+		File file = new File(realPath, fileName);
+		fileManager.fileDelete(file);
+			
+		
+		return noticeDAO.setFileDelete(boardFilesDTO);
+	}
 	
 	public int setCommentsUpdate(CommentsDTO commentsDTO) throws Exception {
 		return noticeDAO.setCommentsUpdate(commentsDTO);

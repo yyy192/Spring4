@@ -20,6 +20,10 @@ public class NoticeDAO implements BoardDAO {
 	private SqlSession sqlSession;
 	private final String NAMESPACE="com.bh.b4.board.notice.NoticeDAO.";
 
+	public int setFileDelete(BoardFilesDTO boardFilesDTO) throws Exception {
+		return sqlSession.delete(NAMESPACE+"setFileDelete", boardFilesDTO);
+	}
+	
 	public int setCommentsUpdate(CommentsDTO commentsDTO) throws Exception {
 		return sqlSession.update(NAMESPACE+"setCommentsUpdate", commentsDTO);
 	}

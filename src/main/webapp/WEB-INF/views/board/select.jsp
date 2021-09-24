@@ -34,6 +34,17 @@
 			</div>
 		</c:forEach>
 		
+		<c:if test="${not empty member and member.id eq dto.writer}">
+			<a href="./delete?num=${dto.num}" class= "btn btn-dark">DELETE</a>
+			<a href="./update?num=${dto.num}" class= "btn btn-dark">UPDATE</a>
+		</c:if>
+		
+		
+		<c:if test="${board ne 'notice'}">
+			<c:if test="${not empty member}">
+			<a href="./reply?num=${dto.num}" class= "btn btn-dark">REPLY</a>
+			</c:if>
+		</c:if>
 		<!-- 댓글 목록 -->
 		<hr>
 		<h5>Comments</h5>
@@ -61,18 +72,7 @@
 			<button class="mb-3 btn btn-outline-secondary" type="button" id="comments">Comment</button>
 		</div>
 		<hr>
-			
-		<c:if test="${not empty member and member.id eq dto.writer}">
-			<a href="./delete?num=${dto.num}" class= "btn btn-dark">DELETE</a>
-			<a href="./update?num=${dto.num}" class= "btn btn-dark">UPDATE</a>
-		</c:if>
 		
-		
-		<c:if test="${board ne 'notice'}">
-			<c:if test="${not empty member}">
-			<a href="./reply?num=${dto.num}" class= "btn btn-dark">REPLY</a>
-			</c:if>
-		</c:if>
 		</div>
 	</div>
 	
@@ -111,6 +111,8 @@
 		if(alert){
 			let contents=$(this).prev().val();
 			let cn = $(this).parent().prev().text().trim();
+			let selector=$(this);
+			
 			console.log(contents);
 			console.log(cn);
 			$.ajax({

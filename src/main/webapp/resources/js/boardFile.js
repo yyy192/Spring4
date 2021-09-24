@@ -11,6 +11,15 @@ file = file + '</div>';
 let count = 0;
 //let index = 0;
 
+function setCount(c){
+	count = c;
+}
+
+function updateCount(){
+	count--;
+}
+
+
 $("#add").click(function(){
 	
 	/*index++;
